@@ -5,54 +5,100 @@ using UnityEngine.UI;
 using UManager = UnityEngine.SceneManagement;
 
 
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour
+{
 
-	public static GameManager instance;
+    public static GameManager instance;
 
-	private bool gameRunning;
+    private bool gameRunning;
 
-	public GameModel gameModel;
+    public GameModel gameModel;
 
-	public Canvas activeCanvas;
-	public Dictionary<string,Canvas> canvases;
+    public Canvas activeCanvas;
+    public Canvas cnvStory;
+    public Canvas cnvInventory;
+    public Canvas cnvMap;
+    private Dictionary<string, Canvas> canvases;
 
-	public void setActiveCanvas (string pName){
+    public Dictionary<string, Canvas> Canvases
+    {
+        get
+        {
+            return canvases;
+        }
 
-		if (canvases.ContainsKey (pName)) {
+        set
+        {
+            canvases = value;
+        }
+    }
 
-			// set all to not active;
-			foreach( Canvas acanvas in canvases.Values){
-				acanvas.gameObject.SetActive (false);
-			}
-			activeCanvas = canvases [pName];
-			Debug.Log("I am the active one " + pName);
+    public void setActiveCanvas(string prName)
+    {
+
+        if (Canvases.ContainsKey(prName))
+        {
+
+            // set all to not active;
+            foreach (Canvas acanvas in Canvases.Values)
+            {
+                acanvas.gameObject.SetActive(false);
+            }
+            activeCanvas = Canvases[prName];
+            Debug.Log("I am the active one " + prName);
             activeCanvas.gameObject.SetActive(true);
-		} else {
-			Debug.Log("I can not find " + pName + " to make active.");
-		}
-	}
-	public string currentUScene()
-	{
-		return UManager.SceneManager.GetActiveScene ().name;
-	}
+        }
+        else
+        {
+            Debug.Log("I can not find " + prName + " to make active.");
+        }
 
-	public void changeUScene(string pSceneName){
-		UManager.SceneManager.LoadScene (pSceneName);
-	}	
+        Canvas[] tempCanvases = gameObject.GetComponentsInChildren<Canvas>();
 
-	void Awake() {
-		if (instance == null) {
-			instance = this;
-			gameRunning = true;
-			Debug.Log("I am the one");
-			gameModel = new GameModel ();
-			canvases = new Dictionary<string,Canvas> ();
-		} else {
-			Destroy (gameObject);
-		}
-	}
-		
-	public bool IsGameRunning(){
-		return gameRunning;
-	}
+        foreach (Canvas aCvn in tempCanvases)
+        {
+            if (aCvn.name != prName)
+            {
+                aCvn.gameObject.SetActive(false);
+            }
+        }
+    }
+    public string currentUScene()
+    {
+        return UManager.SceneManager.GetActiveScene().name;
+    }
+
+    public void changeUScene(string pSceneName)
+    {
+        UManager.SceneManager.LoadScene(pSceneName);
+    }
+
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            gameRunning = true;
+            Debug.Log("I am the one");
+            gameModel = new GameModel();
+            //canvases = new Dictionary<string,Canvas> ();
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
+        if (Canvases == null)
+        {
+            Canvases = new Dictionary<string, Canvas>();
+            Canvases["cnvStory"] = cnvStory;
+            Canvases["cnvInventory"] = cnvInventory;
+            Canvases["cnvMap"] = cnvMap;
+        }
+    }
+
+    public bool IsGameRunning()
+    {
+        return gameRunning;
+    }
 }

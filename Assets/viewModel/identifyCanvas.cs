@@ -12,7 +12,7 @@ public class identifyCanvas : MonoBehaviour {
 
 		// Do we ned to check if we already have this name?
 		if (GameManager.instance != null) {
-			GameManager.instance.canvases.Add (lcName, lcCanvas);
+			GameManager.instance.Canvases.Add (lcName, lcCanvas);
 			Debug.Log ("I added a canvas " + lcName);
 		} else {
 			Debug.Log ("Canvas " + lcName + " not added");

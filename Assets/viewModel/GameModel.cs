@@ -14,7 +14,6 @@ public class GameModel
 
     private static String _name;
     private static Player _player = new Player();
-
     public enum DIRECTION { North, South, East, West };
     private static Scene _start_scene; // ??
     public static Players PlayersInGame = new Players();
@@ -107,7 +106,7 @@ public class GameModel
         };
         starbucks.LstStory.Add("Yup that's starbucks.");
         starbucks.LstStory.Add("You pick up the moneys, another day another dolla. Where to go from here?");
-        starbucks.LstStory.Add("You arrive at starbucks, you see $5 on the ground." + "/n" + "Type 'pick up' to pick it up.");
+        starbucks.LstStory.Add("You arrive at starbucks, you see $5 on the ground. Type 'pick up' to pick it up.");
         starbucks.North = stateCinemas;
         starbucks.South = christChurchSteps;
         starbucks.East = newWorld;
