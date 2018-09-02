@@ -9,6 +9,19 @@
 		public Item ()
 		{
 		}
-	}
+
+    public string Description
+    {
+        get
+        {
+            return _description;
+        }
+
+        set
+        {
+            _description = value;
+        }
+    }
+}
 
 

@@ -15,6 +15,10 @@ public class CommandProcessor
 
     public void Parse(String pCmdStr, aDisplayer display)
     {
+
+        //List index[0] = text if no SceneObject is present
+        //List index[1] = text after SceneObject is picked up
+        //List index[2] = text if a SceneObject is present
         String strResult = "Do not understand";
 
         char[] charSeparators = new char[] { ' ' };
@@ -30,8 +34,9 @@ public class CommandProcessor
                     Debug.Log("Got Pick up");
                     if (GameModel.CurrentPlayer.CurrentScene.SceneObject != null)
                     {
-                        strResult = GameModel.CurrentPlayer.CurrentScene.Text[1];
+                        strResult = GameModel.CurrentPlayer.CurrentScene.LstStory[1];
                         GameModel.Pickup(GameModel.CurrentPlayer.CurrentScene.SceneObject);
+                        GameModel.RemoveItemFromScene(GameModel.CurrentPlayer.CurrentScene.SceneObject);
                     }
                     else
                     {
@@ -43,7 +48,9 @@ public class CommandProcessor
                         String param = parts[2];
                     }// do pick up command
 
+                    
                 }
+                display(strResult);
                 break;
             case "go":
                 switch (parts[1])
@@ -52,28 +59,28 @@ public class CommandProcessor
                         Debug.Log("Got go North");
                         // strResult = "Got Go North";
                         GameModel.go(GameModel.DIRECTION.North);
-
+                        strResult = GameModel.CurrentPlayer.CurrentScene.LstStory[0];
                         break;
                     case "south":
                         Debug.Log("Got go South");
                         GameModel.go(GameModel.DIRECTION.South);
-
+                        strResult = GameModel.CurrentPlayer.CurrentScene.LstStory[0];
                         break;
                     case "east":
                         Debug.Log("Got go East");
                         GameModel.go(GameModel.DIRECTION.East);
-
+                        strResult = GameModel.CurrentPlayer.CurrentScene.LstStory[0];
                         break;
                     case "west":
                         Debug.Log("Got go West");
                         GameModel.go(GameModel.DIRECTION.West);
-
+                        strResult = GameModel.CurrentPlayer.CurrentScene.LstStory[0];
                         break;
                     default:
                         Debug.Log(" do not know how to go there");
                         strResult = "Do not know how to go there";
                         break;
-                }// end switch
+                }
 
                 //call function from scene inherited scene object, two types of scenes
                 // yes/no scene
@@ -82,8 +89,8 @@ public class CommandProcessor
                 // yes/no displays different text upon yes or no
                 // pick up simply places item in your inventory array
 
-
-                //strResult = GameModel.CurrentPlayer.CurrentScene.Text[0];
+                //if (GameManager.instance.activeCanvas == cnvStory)
+                
                 display(strResult);
                 break;
             default:

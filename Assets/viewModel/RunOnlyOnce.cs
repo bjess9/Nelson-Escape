@@ -9,7 +9,7 @@ public class RunOnlyOnce : MonoBehaviour {
 			return;
 		}
 		instance = this;
-		GameModel.makeScenes();
+		GameModel.MakeScenes();
 		// DontDestroyOnLoad(gameObject);
 	}
 }

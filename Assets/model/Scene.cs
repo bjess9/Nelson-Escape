@@ -1,13 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 
-
-	public class Scene
+public class Scene
 	{
 		private Players _players = new Players();
 		private Scene[] _connected_scenes = new Scene[4];
-    // yes/no scenes use Text[1] for the 'yes' response and Text[2] for the 'no' response.
-        private string[] _text;
-    private string _sceneObject;
+
+    private List<string> lstStory = new List<string>();
+    private Item _sceneObject;
 
 
 	    
@@ -53,20 +53,22 @@
         }
     }
 
-    public string[] Text
+
+
+    public List<string> LstStory
     {
         get
         {
-            return _text;
+            return lstStory;
         }
 
         set
         {
-            _text = value;
+            lstStory = value;
         }
     }
 
-    public string SceneObject
+    public Item SceneObject
     {
         get
         {

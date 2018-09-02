@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 public class Player
 {
@@ -8,7 +9,7 @@ public class Player
     // Instance
     private int _number = (Player._player_number++);
     private string _name;
-    private Item[] _inventory;    // is this the right type?
+    private List<Item> _lstInventory = new List<Item>();   
     private Scene _currentScene;
     private Boolean caffeinated = false;
 
@@ -46,6 +47,19 @@ public class Player
         set
         {
             caffeinated = value;
+        }
+    }
+
+    public List<Item> LstInventory
+    {
+        get
+        {
+            return _lstInventory;
+        }
+
+        set
+        {
+            _lstInventory = value;
         }
     }
 
