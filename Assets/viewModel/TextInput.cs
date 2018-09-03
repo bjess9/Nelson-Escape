@@ -25,10 +25,11 @@ public class TextInput : MonoBehaviour {
 		*/
 		input.onEndEdit = se;
         GameModel.MakeScenes();
-		output.text = GameModel.CurrentPlayer.CurrentScene.LstStory[0];
-		//input.onValueChanged = ce;
-	
-	}
+        output.text = GameModel.CurrentPlayer.CurrentScene.LstStory[0];
+        input.ActivateInputField();
+        //input.onValueChanged = ce;
+
+    }
 	
 	// Update is called once per frame
 	/*
@@ -57,4 +58,5 @@ public class TextInput : MonoBehaviour {
 	{
 		Debug.Log(arg0);
 	}
+
 }
