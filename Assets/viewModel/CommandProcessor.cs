@@ -17,38 +17,7 @@ public class CommandProcessor
     // STORY IN INHERITED CLASS, ALLOWS FOR MORE FLEXIBILITY
     // AREA OBJECT HANDS STORY BACK TO COMMANDPROCESS
 
-    public static string DisplayDecisions()
-    {
-        string decisionOutput = "\n" + "\n" + "You can make these decisions:" + "\n";
-        foreach (Action action in GameModel.CurrentPlayer.CurrentArea.DcDecisions)
-        {
-            decisionOutput = decisionOutput + "\n" + Action.DisplayName;
-        }
 
-        decisionOutput = decisionOutput + "\n" + "\n" + "Possible Direction:";
-
-        if (GameModel.CurrentPlayer.CurrentArea.North != null)
-        {
-            decisionOutput = decisionOutput + "\n" + "go north";
-        }
-
-        if (GameModel.CurrentPlayer.CurrentArea.South != null)
-        {
-            decisionOutput = decisionOutput + "\n" + "go south";
-        }
-
-        if (GameModel.CurrentPlayer.CurrentArea.East != null)
-        {
-            decisionOutput = decisionOutput + "\n" + "go east";
-        }
-
-        if (GameModel.CurrentPlayer.CurrentArea.West != null)
-        {
-            decisionOutput = decisionOutput + "\n" + "go west";
-        }
-
-        return decisionOutput;
-    }
 
     public void Parse(String pCmdStr, aDisplayer display)
     {
@@ -61,8 +30,6 @@ public class CommandProcessor
 
         if (parts.Length > 0)
         {
-
-            // process the tokens
             switch (parts[0])
             {
                 case "pick":
@@ -73,10 +40,10 @@ public class CommandProcessor
                         {
                             strResult = GameModel.CurrentPlayer.CurrentArea.DcStory["postPickup"];
 
-                            foreach (Action action in GameModel.CurrentPlayer.CurrentArea.DcDecisions)
+                            foreach (Action action in GameModel.CurrentPlayer.CurrentArea.LstDecisions)
                                 if (Action.DisplayName == "pick up")
                                 {
-                                    GameModel.CurrentPlayer.CurrentArea.DcDecisions.Remove(action);
+                                    GameModel.CurrentPlayer.CurrentArea.LstDecisions.Remove(action);
                                 }
 
                             strResult = strResult + DisplayDecisions();
@@ -99,21 +66,25 @@ public class CommandProcessor
                     {
                         case "north":
                             Debug.Log("Got go North");
+                            setVisitedToTrueIfFirstTime();
                             GameModel.go(GameModel.DIRECTION.North);
                             strResult = logicForDisplay();
                             break;
                         case "south":
                             Debug.Log("Got go South");
+                            setVisitedToTrueIfFirstTime();
                             GameModel.go(GameModel.DIRECTION.South);
                             strResult = logicForDisplay();
                             break;
                         case "east":
                             Debug.Log("Got go East");
+                            setVisitedToTrueIfFirstTime();
                             GameModel.go(GameModel.DIRECTION.East);
                             strResult = logicForDisplay();
                             break;
                         case "west":
                             Debug.Log("Got go West");
+                            setVisitedToTrueIfFirstTime();
                             GameModel.go(GameModel.DIRECTION.West);
                             strResult = logicForDisplay();
                             break;
@@ -161,21 +132,73 @@ public class CommandProcessor
 
     }// Parse
 
+    private static void setVisitedToTrueIfFirstTime()
+    {
+        if (GameModel.CurrentPlayer.CurrentArea.Visited != true)
+        {
+            GameModel.CurrentPlayer.CurrentArea.Visited = true;
+        }
+    }
+
     private static string logicForDisplay()
     {
         string strResult;
-        if (GameModel.CurrentPlayer.CurrentArea.AreaObject == null)
+        if (GameModel.CurrentPlayer.CurrentArea.Visited != true & GameModel.CurrentPlayer.CurrentArea.AreaObject == null)
+        {
+            
+            strResult = GameModel.CurrentPlayer.CurrentArea.DcStory["defaultFirstVisit"];
+            strResult = strResult + DisplayDecisions();
+        }
+        else if (GameModel.CurrentPlayer.CurrentArea.AreaObject == null & GameModel.CurrentPlayer.CurrentArea.Visited == true)
         {
             strResult = GameModel.CurrentPlayer.CurrentArea.DcStory["default"];
             strResult = strResult + DisplayDecisions();
         }
-        else
+        else if (GameModel.CurrentPlayer.CurrentArea.AreaObject != null)
         {
             strResult = GameModel.CurrentPlayer.CurrentArea.DcStory["prePickup"];
             strResult = strResult + DisplayDecisions();
         }
-
+        else
+        {
+            strResult = "Something is broken with the logicForDisplay() method.";
+            strResult = strResult + DisplayDecisions();
+        }
         return strResult;
+    }
+
+    public static string DisplayDecisions()
+    {
+        string decisionOutput = "\n" + "\n" + "You can make these decisions:" + "\n";
+        foreach (Action action in GameModel.CurrentPlayer.CurrentArea.LstDecisions)
+        {
+            // NOT DISPLAYING PICKUP NAME FIX THIS
+            decisionOutput = decisionOutput + "\n" + Pickup.DisplayName;
+        }
+
+        decisionOutput = decisionOutput + "\n" + "\n" + "Possible Direction:";
+
+        if (GameModel.CurrentPlayer.CurrentArea.North != null)
+        {
+            decisionOutput = decisionOutput + "\n" + "go north";
+        }
+
+        if (GameModel.CurrentPlayer.CurrentArea.South != null)
+        {
+            decisionOutput = decisionOutput + "\n" + "go south";
+        }
+
+        if (GameModel.CurrentPlayer.CurrentArea.East != null)
+        {
+            decisionOutput = decisionOutput + "\n" + "go east";
+        }
+
+        if (GameModel.CurrentPlayer.CurrentArea.West != null)
+        {
+            decisionOutput = decisionOutput + "\n" + "go west";
+        }
+
+        return decisionOutput;
     }
 }
 

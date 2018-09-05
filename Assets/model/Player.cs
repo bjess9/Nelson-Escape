@@ -13,7 +13,6 @@ public class Player
     private Area _currentArea;
     private Boolean caffeinated = false;
 
-
     public Area CurrentArea
     {
         get

@@ -61,7 +61,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\model\Area.cs" />
+    <Compile Include="Assets\model\Areas\Area.cs" />
+    <Compile Include="Assets\model\Areas\areaChristChurchSteps.cs" />
+    <Compile Include="Assets\model\Areas\areaCombat.cs" />
+    <Compile Include="Assets\model\Areas\areaNewWorld.cs" />
+    <Compile Include="Assets\model\Areas\areaNMIT.cs" />
+    <Compile Include="Assets\model\Areas\areaStarbucks.cs" />
+    <Compile Include="Assets\model\Areas\areaStateCinemas.cs" />
     <Compile Include="Assets\model\GameModel.cs" />
     <Compile Include="Assets\model\Item.cs" />
     <Compile Include="Assets\model\Player.cs" />

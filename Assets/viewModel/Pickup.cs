@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Pickup : Action  {
 
-    private static readonly string displayName = "pick up";
+    public readonly string displayName = "pick up";
 
     public static void pickupItem()
     {
