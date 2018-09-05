@@ -10,19 +10,19 @@ public class Player
     private int _number = (Player._player_number++);
     private string _name;
     private List<Item> _lstInventory = new List<Item>();   
-    private Scene _currentScene;
+    private Area _currentArea;
     private Boolean caffeinated = false;
 
 
-    public Scene CurrentScene
+    public Area CurrentArea
     {
         get
         {
-            return _currentScene;
+            return _currentArea;
         }
         set
         {
-            _currentScene = value;
+            _currentArea = value;
         }
     }
     public String Name
@@ -69,27 +69,27 @@ public class Player
         {
             case GameModel.DIRECTION.North: // but what do we do??
 
-                if (_currentScene.North != null)
+                if (_currentArea.North != null)
                 {
-                    _currentScene = _currentScene.North;
+                    _currentArea = _currentArea.North;
                 }
                 break;
             case GameModel.DIRECTION.South:
-                if (_currentScene.South != null)
+                if (_currentArea.South != null)
                 {
-                    _currentScene = _currentScene.South;
+                    _currentArea = _currentArea.South;
                 }
                 break;
             case GameModel.DIRECTION.East:
-                if (_currentScene.East != null)
+                if (_currentArea.East != null)
                 {
-                    _currentScene = _currentScene.East;
+                    _currentArea = _currentArea.East;
                 }
                 break;
             case GameModel.DIRECTION.West:
-                if (_currentScene.West != null)
+                if (_currentArea.West != null)
                 {
-                    _currentScene = _currentScene.West;
+                    _currentArea = _currentArea.West;
                 }
                 break;
         }

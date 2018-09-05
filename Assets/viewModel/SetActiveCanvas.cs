@@ -9,9 +9,8 @@ public class SetActiveCanvas : MonoBehaviour {
 		Canvas[] lcCanvases = gameObject.GetComponents<Canvas>();
 		Canvas lcCanvas = lcCanvases [0];
 		string lcName = lcCanvas.name;
-		if(GameManager.instance != null)
-		  // Do we need to check if we already have this name?
-		  GameManager.instance.setActiveCanvas (lcName);
-
+        if (GameManager.instance != null)
+            // Do we need to check if we already have this name?
+            GameManager.instance.setActiveCanvas(lcName);
 	}
 }

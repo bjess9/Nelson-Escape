@@ -12,13 +12,47 @@ public class CommandProcessor
     public CommandProcessor()
     {
     }
+    // AREA ABSTRACT
+    // EACH AREA HAS ITS OWN INHERITED CLASS
+    // STORY IN INHERITED CLASS, ALLOWS FOR MORE FLEXIBILITY
+    // AREA OBJECT HANDS STORY BACK TO COMMANDPROCESS
+
+    public static string DisplayDecisions()
+    {
+        string decisionOutput = "\n" + "\n" + "You can make these decisions:" + "\n";
+        foreach (Action action in GameModel.CurrentPlayer.CurrentArea.DcDecisions)
+        {
+            decisionOutput = decisionOutput + "\n" + Action.DisplayName;
+        }
+
+        decisionOutput = decisionOutput + "\n" + "\n" + "Possible Direction:";
+
+        if (GameModel.CurrentPlayer.CurrentArea.North != null)
+        {
+            decisionOutput = decisionOutput + "\n" + "go north";
+        }
+
+        if (GameModel.CurrentPlayer.CurrentArea.South != null)
+        {
+            decisionOutput = decisionOutput + "\n" + "go south";
+        }
+
+        if (GameModel.CurrentPlayer.CurrentArea.East != null)
+        {
+            decisionOutput = decisionOutput + "\n" + "go east";
+        }
+
+        if (GameModel.CurrentPlayer.CurrentArea.West != null)
+        {
+            decisionOutput = decisionOutput + "\n" + "go west";
+        }
+
+        return decisionOutput;
+    }
 
     public void Parse(String pCmdStr, aDisplayer display)
     {
 
-        //List index[0] = text if no SceneObject is present
-        //List index[1] = text after SceneObject is picked up
-        //List index[2] = text if a SceneObject is present
         String strResult = "Do not understand";
 
         char[] charSeparators = new char[] { ' ' };
@@ -28,7 +62,6 @@ public class CommandProcessor
         if (parts.Length > 0)
         {
 
-
             // process the tokens
             switch (parts[0])
             {
@@ -36,11 +69,18 @@ public class CommandProcessor
                     if (parts[1] == "up")
                     {
                         Debug.Log("Got Pick up");
-                        if (GameModel.CurrentPlayer.CurrentScene.SceneObject != null)
+                        if (GameModel.CurrentPlayer.CurrentArea.AreaObject != null)
                         {
-                            strResult = GameModel.CurrentPlayer.CurrentScene.LstStory[1];
-                            GameModel.Pickup(GameModel.CurrentPlayer.CurrentScene.SceneObject);
-                            GameModel.RemoveItemFromScene(GameModel.CurrentPlayer.CurrentScene.SceneObject);
+                            strResult = GameModel.CurrentPlayer.CurrentArea.DcStory["postPickup"];
+
+                            foreach (Action action in GameModel.CurrentPlayer.CurrentArea.DcDecisions)
+                                if (Action.DisplayName == "pick up")
+                                {
+                                    GameModel.CurrentPlayer.CurrentArea.DcDecisions.Remove(action);
+                                }
+
+                            strResult = strResult + DisplayDecisions();
+                            Pickup.pickupItem();
                         }
                         else
                         {
@@ -60,50 +100,22 @@ public class CommandProcessor
                         case "north":
                             Debug.Log("Got go North");
                             GameModel.go(GameModel.DIRECTION.North);
-                            if (GameModel.CurrentPlayer.CurrentScene.SceneObject == null)
-                            {
-                                strResult = GameModel.CurrentPlayer.CurrentScene.LstStory[0];
-                            }
-                            else
-                            {
-                                strResult = GameModel.CurrentPlayer.CurrentScene.LstStory[2];
-                            }
+                            strResult = logicForDisplay();
                             break;
                         case "south":
                             Debug.Log("Got go South");
                             GameModel.go(GameModel.DIRECTION.South);
-                            if (GameModel.CurrentPlayer.CurrentScene.SceneObject == null)
-                            {
-                                strResult = GameModel.CurrentPlayer.CurrentScene.LstStory[0];
-                            }
-                            else
-                            {
-                                strResult = GameModel.CurrentPlayer.CurrentScene.LstStory[2];
-                            }
+                            strResult = logicForDisplay();
                             break;
                         case "east":
                             Debug.Log("Got go East");
                             GameModel.go(GameModel.DIRECTION.East);
-                            if (GameModel.CurrentPlayer.CurrentScene.SceneObject == null)
-                            {
-                                strResult = GameModel.CurrentPlayer.CurrentScene.LstStory[0];
-                            }
-                            else
-                            {
-                                strResult = GameModel.CurrentPlayer.CurrentScene.LstStory[2];
-                            }
+                            strResult = logicForDisplay();
                             break;
                         case "west":
                             Debug.Log("Got go West");
                             GameModel.go(GameModel.DIRECTION.West);
-                            if (GameModel.CurrentPlayer.CurrentScene.SceneObject == null)
-                            {
-                                strResult = GameModel.CurrentPlayer.CurrentScene.LstStory[0];
-                            }
-                            else
-                            {
-                                strResult = GameModel.CurrentPlayer.CurrentScene.LstStory[2];
-                            }
+                            strResult = logicForDisplay();
                             break;
                         default:
                             Debug.Log(" do not know how to go there");
@@ -127,7 +139,6 @@ public class CommandProcessor
                             break;
                     }
 
-
                     //call function from scene inherited scene object, two types of scenes
                     // yes/no scene
                     // pickup item scene
@@ -149,6 +160,23 @@ public class CommandProcessor
         // return strResult;
 
     }// Parse
+
+    private static string logicForDisplay()
+    {
+        string strResult;
+        if (GameModel.CurrentPlayer.CurrentArea.AreaObject == null)
+        {
+            strResult = GameModel.CurrentPlayer.CurrentArea.DcStory["default"];
+            strResult = strResult + DisplayDecisions();
+        }
+        else
+        {
+            strResult = GameModel.CurrentPlayer.CurrentArea.DcStory["prePickup"];
+            strResult = strResult + DisplayDecisions();
+        }
+
+        return strResult;
+    }
 }
 
 

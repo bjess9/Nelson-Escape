@@ -18,5 +18,4 @@ public class identifyCanvas : MonoBehaviour {
 			Debug.Log ("Canvas " + lcName + " not added");
 		}
 	}
-
 }

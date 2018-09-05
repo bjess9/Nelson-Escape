@@ -13,7 +13,7 @@ public class CameraRoot : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        GameModel.MakeScenes();
+        GameModel.MakeArea();
 
     }
 

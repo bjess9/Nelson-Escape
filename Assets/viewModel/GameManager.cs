@@ -11,7 +11,6 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     private bool gameRunning;
-
     public GameModel gameModel;
 
     public Canvas activeCanvas;

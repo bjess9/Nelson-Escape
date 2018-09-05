@@ -61,19 +61,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\model\Area.cs" />
+    <Compile Include="Assets\model\GameModel.cs" />
     <Compile Include="Assets\model\Item.cs" />
     <Compile Include="Assets\model\Player.cs" />
     <Compile Include="Assets\model\Players.cs" />
-    <Compile Include="Assets\model\Scene.cs" />
+    <Compile Include="Assets\viewModel\Action.cs" />
     <Compile Include="Assets\viewModel\CameraRoot.cs" />
     <Compile Include="Assets\viewModel\CommandProcessor.cs" />
     <Compile Include="Assets\viewModel\focusInput.cs" />
     <Compile Include="Assets\viewModel\GameManager.cs" />
-    <Compile Include="Assets\viewModel\GameModel.cs" />
     <Compile Include="Assets\viewModel\identifyCanvas.cs" />
     <Compile Include="Assets\viewModel\inventoryOutput.cs" />
     <Compile Include="Assets\viewModel\LoadOnClickCanvas.cs" />
     <Compile Include="Assets\viewModel\onClickSceneChange.cs" />
+    <Compile Include="Assets\viewModel\Pickup.cs" />
     <Compile Include="Assets\viewModel\RunOnlyOnce.cs" />
     <Compile Include="Assets\viewModel\SetActiveCanvas.cs" />
     <Compile Include="Assets\viewModel\TextInput.cs" />

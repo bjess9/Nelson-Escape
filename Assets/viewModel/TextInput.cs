@@ -24,8 +24,8 @@ public class TextInput : MonoBehaviour {
 		ce.AddListener(ChangeInput);
 		*/
 		input.onEndEdit = se;
-        GameModel.MakeScenes();
-        output.text = GameModel.CurrentPlayer.CurrentScene.LstStory[0];
+        //GameModel.MakeScenes();
+        output.text = GameModel.CurrentPlayer.CurrentArea.DcStory["default"];
         input.ActivateInputField();
         //input.onValueChanged = ce;
 
