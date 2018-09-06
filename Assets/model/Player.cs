@@ -4,14 +4,18 @@ using System.Collections.Generic;
 public class Player
 {
     // Class
-    private static int _player_number = 0;
+    //private static int _player_number = 0;
 
     // Instance
-    private int _number = (Player._player_number++);
-    private string _name;
-    private List<Item> _lstInventory = new List<Item>();   
+    //private int _number = (Player._player_number++);
+    //private string _name;
+
+    // list of items in the players inventory
+    private List<Item> _lstInventory = new List<Item>();
+
+    //current area
     private Area _currentArea;
-    private Boolean caffeinated = false;
+    //private Boolean caffeinated = false;
 
     public Area CurrentArea
     {
@@ -24,30 +28,31 @@ public class Player
             _currentArea = value;
         }
     }
-    public String Name
-    {
-        get
-        {
-            return _name;
-        }
-        set
-        {
-            _name = value;
-        }
-    }
 
-    public bool Caffeinated
-    {
-        get
-        {
-            return caffeinated;
-        }
+    //public String Name
+    //{
+    //    get
+    //    {
+    //        return _name;
+    //    }
+    //    set
+    //    {
+    //        _name = value;
+    //    }
+    //}
 
-        set
-        {
-            caffeinated = value;
-        }
-    }
+    //public bool Caffeinated
+    //{
+    //    get
+    //    {
+    //        return caffeinated;
+    //    }
+
+    //    set
+    //    {
+    //        caffeinated = value;
+    //    }
+    //}
 
     public List<Item> LstInventory
     {
@@ -62,11 +67,12 @@ public class Player
         }
     }
 
+    //moving players current area
     public void Move(GameModel.DIRECTION pDirection)
     {
         switch (pDirection)
         {
-            case GameModel.DIRECTION.North: // but what do we do??
+            case GameModel.DIRECTION.North:
 
                 if (_currentArea.North != null)
                 {
@@ -93,9 +99,9 @@ public class Player
                 break;
         }
     }
-    public Player()
-    {
-    }
+    //public Player()
+    //{
+    //}
 }
 
 

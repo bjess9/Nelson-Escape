@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class areaChristChurchSteps : Area
 {
-    public areaChristChurchSteps()
-    {
+    //public areaChristChurchSteps()
+    //{
 
-    }
+    //}
 
 
 }

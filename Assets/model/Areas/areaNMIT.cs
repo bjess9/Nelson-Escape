@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class areaNMIT : Area
 {
-    public areaNMIT()
-    {
+    //public areaNMIT()
+    //{
 
-    }
+    //}
 }

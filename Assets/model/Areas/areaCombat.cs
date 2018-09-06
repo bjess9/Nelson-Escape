@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class areaCombat : Area
 {
-    public areaCombat()
-    {
+    //public areaCombat()
+    //{
 
-    }
+    //}
 }

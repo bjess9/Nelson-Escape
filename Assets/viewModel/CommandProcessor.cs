@@ -12,18 +12,13 @@ public class CommandProcessor
     public CommandProcessor()
     {
     }
-    // AREA ABSTRACT
-    // EACH AREA HAS ITS OWN INHERITED CLASS
-    // STORY IN INHERITED CLASS, ALLOWS FOR MORE FLEXIBILITY
-    // AREA OBJECT HANDS STORY BACK TO COMMANDPROCESS
-
-
 
     public void Parse(String pCmdStr, aDisplayer display)
     {
-
+        // default display
         String strResult = "Do not understand";
 
+        //seperating input by spaces and putting into an array for processing
         char[] charSeparators = new char[] { ' ' };
         pCmdStr = pCmdStr.ToLower();
         String[] parts = pCmdStr.Split(charSeparators, StringSplitOptions.RemoveEmptyEntries); // tokenise the command
@@ -31,7 +26,7 @@ public class CommandProcessor
         if (parts.Length > 0)
         {
             switch (parts[0])
-            {
+            {//first condition logic
                 case "pick":
                     if (parts[1] == "up")
                     {
@@ -40,24 +35,30 @@ public class CommandProcessor
                         {
                             strResult = GameModel.CurrentPlayer.CurrentArea.DcStory["postPickup"];
 
+                            //removes pickup action from scene if an object is picked up
                             foreach (Action action in GameModel.CurrentPlayer.CurrentArea.LstDecisions)
                                 if (Action.DisplayName == "pick up")
                                 {
                                     GameModel.CurrentPlayer.CurrentArea.LstDecisions.Remove(action);
+                                    break;
                                 }
 
+                            //adds displaydecisions result to current output 
                             strResult = strResult + DisplayDecisions();
+
+                            //picks up item
                             Pickup.pickupItem();
                         }
                         else
                         {
                             strResult = "There is nothing to pick up";
+                            strResult = strResult + logicForDisplay();
                         }
 
                         if (parts.Length == 3)
                         {
                             String param = parts[2];
-                        }// do pick up command
+                        }
                     }
                     display(strResult);
                     break;
@@ -67,26 +68,58 @@ public class CommandProcessor
                         case "north":
                             Debug.Log("Got go North");
                             setVisitedToTrueIfFirstTime();
-                            GameModel.go(GameModel.DIRECTION.North);
-                            strResult = logicForDisplay();
+                            //only attempts to go north if there is an area connected to the north direction
+                            if (GameModel.CurrentPlayer.CurrentArea.North != null)
+                            {
+                                GameModel.go(GameModel.DIRECTION.North);
+                                strResult = logicForDisplay();
+                            }
+                            else
+                            {
+                                strResult = "You can't go in that direction";
+                            }
+
                             break;
                         case "south":
                             Debug.Log("Got go South");
                             setVisitedToTrueIfFirstTime();
-                            GameModel.go(GameModel.DIRECTION.South);
-                            strResult = logicForDisplay();
+                            if (GameModel.CurrentPlayer.CurrentArea.South != null)
+                            {
+                                GameModel.go(GameModel.DIRECTION.South);
+                                strResult = logicForDisplay();
+                            }
+                            else
+                            {
+                                strResult = "You can't go in that direction";
+                            }
+
                             break;
                         case "east":
                             Debug.Log("Got go East");
                             setVisitedToTrueIfFirstTime();
-                            GameModel.go(GameModel.DIRECTION.East);
-                            strResult = logicForDisplay();
+                            if (GameModel.CurrentPlayer.CurrentArea.East != null)
+                            {
+                                GameModel.go(GameModel.DIRECTION.East);
+                                strResult = logicForDisplay();
+                            }
+                            else
+                            {
+                                strResult = "You can't go in that direction";
+                            }
+
                             break;
                         case "west":
                             Debug.Log("Got go West");
                             setVisitedToTrueIfFirstTime();
-                            GameModel.go(GameModel.DIRECTION.West);
-                            strResult = logicForDisplay();
+                            if (GameModel.CurrentPlayer.CurrentArea.West != null)
+                            {
+                                GameModel.go(GameModel.DIRECTION.West);
+                                strResult = logicForDisplay();
+                            }
+                            else
+                            {
+                                strResult = "You can't go in that direction";
+                            }
                             break;
                         default:
                             Debug.Log(" do not know how to go there");
@@ -96,17 +129,19 @@ public class CommandProcessor
                     }
                     display(strResult);
                     break;
-                case "show":
+                case "show"://shows canvas using text input
                     switch (parts[1])
                     {
+                    
                         case "story":
-                            GameManager.instance.setActiveCanvas("cnvStory");
+                            GameManager.GameManagerInstance.setActiveCanvas("cnvStory");
+                            strResult = logicForDisplay();
                             break;
                         case "inventory":
-                            GameManager.instance.setActiveCanvas("cnvInventory");
+                            GameManager.GameManagerInstance.setActiveCanvas("cnvInventory");
                             break;
                         case "map":
-                            GameManager.instance.setActiveCanvas("cnvMap");
+                            GameManager.GameManagerInstance.setActiveCanvas("cnvMap");
                             break;
                     }
 
@@ -132,6 +167,7 @@ public class CommandProcessor
 
     }// Parse
 
+    //changes visited flag
     private static void setVisitedToTrueIfFirstTime()
     {
         if (GameModel.CurrentPlayer.CurrentArea.Visited != true)
@@ -140,6 +176,7 @@ public class CommandProcessor
         }
     }
 
+    //logic for the story text output
     private static string logicForDisplay()
     {
         string strResult;
@@ -167,13 +204,14 @@ public class CommandProcessor
         return strResult;
     }
 
+    //logic for the text pertaining to what actions you can make and directions you can go in
     public static string DisplayDecisions()
     {
+
         string decisionOutput = "\n" + "\n" + "You can make these decisions:" + "\n";
         foreach (Action action in GameModel.CurrentPlayer.CurrentArea.LstDecisions)
         {
-            // NOT DISPLAYING PICKUP NAME FIX THIS
-            decisionOutput = decisionOutput + "\n" + Pickup.DisplayName;
+            decisionOutput = decisionOutput + "\n" + action.returnDisplayName();
         }
 
         decisionOutput = decisionOutput + "\n" + "\n" + "Possible Direction:";

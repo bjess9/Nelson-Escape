@@ -8,15 +8,17 @@ using System.Text;
 public class GameModel
 {
 
-    private static String _name = "Bro";
+    //private static String _name = "Bro";
+
+    //holds current player object
     private static Player _currentPlayer = new Player();
     public enum DIRECTION { North, South, East, West };
     //private static Area _startArea; // ??
-    public static Players PlayersInGame = new Players();
+    //public static Players PlayersInGame = new Players();
 
     public GameModel()
     {
-        MakeArea();
+        MakeAreas();
     }
 
     //public static Area StartArea
@@ -32,18 +34,18 @@ public class GameModel
 
     //}
 
-    public static string Name
-    {
-        get
-        {
-            return _name;
-        }
-        set
-        {
-            _name = value;
-        }
+    //public static string Name
+    //{
+    //    get
+    //    {
+    //        return _name;
+    //    }
+    //    set
+    //    {
+    //        _name = value;
+    //    }
 
-    }
+    //}
 
     public static Player CurrentPlayer
     {
@@ -75,20 +77,20 @@ public class GameModel
 
 
 
-    public static void MakeArea()
+    public static void MakeAreas()
     {
-        //change canvas for swapping to inventory/map    
+        //instantiates area objects
         areaChristChurchSteps christChurchSteps = new areaChristChurchSteps();
         areaStarbucks starbucks = new areaStarbucks();
         areaNMIT NMIT = new areaNMIT();
         areaNewWorld newWorld = new areaNewWorld();
         areaStateCinemas stateCinemas = new areaStateCinemas();
 
-        //sets the current scene to the beginning scene upon scene creation.
+        //sets the current scene, note this also stores all related scenes as they are connected through the 'memory pointers' within the object
         _currentPlayer.CurrentArea = christChurchSteps;
 
-        //DEFAULT Christ Church Steps (Start Scene)
-        christChurchSteps.DcStory.Add("defaultFirstVisit", "You wake up on some stone steps in Nelson, you appear to be on the main street. Enter 'go north' to continue.");
+        //Christ Church Steps (Start Scene)
+        christChurchSteps.DcStory.Add("defaultFirstVisit", "You wake up on some stone steps in Nelson, you appear to be on the main street.\n\nEnter 'go north' to Begin.");
         christChurchSteps.DcStory.Add("default", "You return to the steps again, nothing to see here");
         christChurchSteps.North = starbucks;
         christChurchSteps.South = null;
@@ -100,9 +102,10 @@ public class GameModel
         {
             Description = "$5"
         };
-        starbucks.DcStory.Add("default", "Yup that's starbucks.");
+        starbucks.DcStory.Add("defaultFirstVisit", "You arrive at starbucks, no money on the ground this time.");
+        starbucks.DcStory.Add("default", "You return to starbucks.");
         starbucks.DcStory.Add("postPickup", "You pick up the moneys, another day another dolla. Where to go from here?");
-        starbucks.DcStory.Add("prePickup", "You arrive at starbucks, you see $5 on the ground. Type 'pick up' to pick it up.");
+        starbucks.DcStory.Add("prePickup", "You arrive at starbucks, you see $5 on the ground.");
         //starbucks.ActionPickup = new Pickup();
         //starbucks.LstDecisions.Add(starbucks.ActionPickup);
         starbucks.North = stateCinemas;
@@ -111,7 +114,8 @@ public class GameModel
         starbucks.West = NMIT;
 
         //DECISION NMIT
-        NMIT.DcStory.Add("default", "youre at nmit, decision not implemented yet");
+        NMIT.DcStory.Add("defaultFirstVisit", "you're at nmit decision not implemented yet");
+        NMIT.DcStory.Add("default", "you return to nmit, decision not implemented yet");
         NMIT.DcStory.Add("preDecision", "You walk onto the local polytech ground, searching for someone who might know now to escape this damn city." + "\n" + "Someone approaches you and asks" +
                             "you want to do their SYD survey, do you want to do it? yes/no");
         NMIT.DcStory.Add("postDecisionYes", "The student is grateful and gives you a free coffee voucher in return!");
@@ -122,11 +126,13 @@ public class GameModel
         NMIT.West = null;
 
         //PICK UP newWorld
-        //newWorld.AreaObject = new Item
-        //{
-        //    Description = "Flute"
-        //};
-        newWorld.DcStory.Add("default", "Yup that's new world.");
+        newWorld.AreaObject = new Item
+        {
+            Description = "Flute"
+        };
+
+        newWorld.DcStory.Add("defaultFirstVisit", "new world, no flute on the ground anymore.");
+        newWorld.DcStory.Add("default", "you return to new world.");
         newWorld.DcStory.Add("postPickup", "you picked up the flute, you absolute madman, lets get out of here!!");
         newWorld.DcStory.Add("prePickup", "new world, wow look there's a flute on the ground, enter 'pick up' to pick it up hahahaha");
         newWorld.North = null;
@@ -135,7 +141,8 @@ public class GameModel
         newWorld.West = starbucks;
 
         //DECISION stateCinemas
-        stateCinemas.DcStory.Add("default", "youre at state cinemas, decision not implemented yet");
+        stateCinemas.DcStory.Add("defaultFirstVisit", "you arrive at state cinemas, decision not implemented yet");
+        stateCinemas.DcStory.Add("default", "you return to state cinemas, decision not implemented yet");
         stateCinemas.DcStory.Add("preDecision", "cinemas, they're selling popcorn, do you want to buy? Enter y/n.");
         stateCinemas.DcStory.Add("postDecisionYes", "The student is grateful and gives you a free coffee voucher in return!");
         stateCinemas.DcStory.Add("postDecisionNo", "You politely decline and realize nobody helpful is here, where to next?");

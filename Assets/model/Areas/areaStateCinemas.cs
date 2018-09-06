@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class areaStateCinemas : Area
 {
-    public areaStateCinemas()
-    {
+    //public areaStateCinemas()
+    //{
 
-    }
+    //}
 }

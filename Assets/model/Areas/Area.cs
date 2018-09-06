@@ -3,13 +3,24 @@ using System.Collections.Generic;
 
 public abstract class Area
 {
-    private Players _players = new Players();
+    //Code responsible for general area variables and behaviours
+
+
+    //private Players _players = new Players();
+
+    //areas connected to the current area object
     private Area[] _connectedAreas = new Area[4];
 
+    //story text for the current area object
     private Dictionary<string, string> dcStory = new Dictionary<string, string>();
+
+    //list of action classes included with the area object
     private List<Action> lstDecisions = new List<Action>();
+
+    //visited flag to have customer text for first and following visits
     private bool visited = false;
 
+    //un-instantiated classes that will be instantiated within the area object if applicable to the area
     private Item _areaObject;
     private Pickup _actionPickup;
 
@@ -126,9 +137,9 @@ public abstract class Area
         }
     }
 
-    public Area()
-    {
-    }
+    //public Area()
+    //{
+    //}
 }
 
 

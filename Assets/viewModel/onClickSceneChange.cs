@@ -7,7 +7,14 @@ public class onClickSceneChange : MonoBehaviour {
 
     public void LoadScene(string pSceneName)
     {
+        //code for changing scene on click
+        if(pSceneName == "menu")
+        {
+            GameModel.CurrentPlayer.LstInventory.Clear();
+        }
         SceneManager.LoadScene(pSceneName);
+
+
     }
 
     public void quitGame()

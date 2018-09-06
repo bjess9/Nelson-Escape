@@ -2,6 +2,7 @@
 using UnityEngine;
 
 public class RunOnlyOnce : MonoBehaviour {
+    //not implemented
 	public static RunOnlyOnce instance;
 	void Awake() {
 		if(instance != null && instance != this) {
@@ -9,7 +10,7 @@ public class RunOnlyOnce : MonoBehaviour {
 			return;
 		}
 		instance = this;
-		GameModel.MakeArea();
+		GameModel.MakeAreas();
 		// DontDestroyOnLoad(gameObject);
 	}
 }

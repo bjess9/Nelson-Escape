@@ -6,6 +6,7 @@ public class LoadOnClickCanvas : MonoBehaviour {
 
     public void ChangeCanvas(Canvas pCanvas)
     {
+        //code for changing canvas on click of button
         pCanvas.gameObject.SetActive(true);
 
         Canvas[] canvases = gameObject.GetComponentsInChildren<Canvas>();

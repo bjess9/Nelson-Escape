@@ -8,12 +8,11 @@ public class TextInput : MonoBehaviour {
 	InputField.OnChangeEvent ce;
 	public Text output;
 
+
 	public void TextUpdate(string aStr){
-		output.text = aStr;
+		output.text += "\n" + "__________________________________________________" +  "\n" + "\n" + "\n" + aStr;
 	}
 
-
-	// Use this for initialization
 	void Start () {
 		// GameModel.makeScenes();
 		input = this.GetComponent<InputField>();
@@ -25,6 +24,8 @@ public class TextInput : MonoBehaviour {
 		*/
 		input.onEndEdit = se;
         //GameModel.MakeScenes();
+
+        //displays initial story text in the first story area
         output.text = GameModel.CurrentPlayer.CurrentArea.DcStory["defaultFirstVisit"];
         input.ActivateInputField();
         //input.onValueChanged = ce;

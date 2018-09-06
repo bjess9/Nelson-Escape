@@ -3,12 +3,12 @@
 
 	public class Item
 	{
-
+        //item description text
 		private string _description;
 
-		public Item ()
-		{
-		}
+		//public Item ()
+		//{
+		//}
 
     public string Description
     {

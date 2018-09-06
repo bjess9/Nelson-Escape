@@ -8,11 +8,16 @@ using UManager = UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
 
-    public static GameManager instance;
+    //game manager instance
+    private static GameManager gameManager;
 
+    //flag to indicate that the game is running
     private bool gameRunning;
+
+    //game model instance
     public GameModel gameModel;
 
+    //canvas variables
     public Canvas activeCanvas;
     public Canvas cnvStory;
     public Canvas cnvInventory;
@@ -32,6 +37,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public static GameManager GameManagerInstance
+    {
+        get
+        {
+            return gameManager;
+        }
+
+        set
+        {
+            gameManager = value;
+        }
+    }
+
     public void setActiveCanvas(string prName)
     {
 
@@ -45,6 +63,7 @@ public class GameManager : MonoBehaviour
             }
             activeCanvas = Canvases[prName];
             Debug.Log("I am the active one " + prName);
+            //sets active canvas
             activeCanvas.gameObject.SetActive(true);
         }
         else
@@ -74,16 +93,19 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        if (instance == null)
+
+        if (GameManagerInstance == null)
         {
-            instance = this;
+            GameManagerInstance = this;
             gameRunning = true;
             Debug.Log("I am the one");
+            //instantiates the game model
             gameModel = new GameModel();
             //canvases = new Dictionary<string,Canvas> ();
         }
         else
         {
+            //destroys if game already running
             Destroy(gameObject);
         }
 
