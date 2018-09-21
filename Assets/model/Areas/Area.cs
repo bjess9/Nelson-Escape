@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
+[Serializable]
 public abstract class Area
 {
     //Code responsible for general area variables and behaviours
@@ -15,7 +16,7 @@ public abstract class Area
     private Dictionary<string, string> dcStory = new Dictionary<string, string>();
 
     //list of action classes included with the area object
-    private List<Action> lstDecisions = new List<Action>();
+    private List<PlayerAction> lstDecisions = new List<PlayerAction>();
 
     //visited flag to have customer text for first and following visits
     private bool visited = false;
@@ -98,7 +99,7 @@ public abstract class Area
         }
     }
 
-    public List<Action> LstDecisions
+    public List<PlayerAction> LstDecisions
     {
         get
         {
@@ -136,10 +137,6 @@ public abstract class Area
             visited = value;
         }
     }
-
-    //public Area()
-    //{
-    //}
 }
 
 

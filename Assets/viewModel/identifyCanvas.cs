@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class identifyCanvas : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		Canvas[] lcCanvases = gameObject.GetComponents<Canvas>();
-		Canvas lcCanvas = lcCanvases [0];
-		string lcName = lcCanvas.name;
+	//// Use this for initialization
+	//void Start () {
+	//	Canvas[] lcCanvases = gameObject.GetComponents<Canvas>();
+	//	Canvas lcCanvas = lcCanvases [0];
+	//	string lcName = lcCanvas.name;
 
-		// Do we ned to check if we already have this name?
-		if (GameManager.GameManagerInstance != null & GameManager.GameManagerInstance.Canvases == null) {
-			GameManager.GameManagerInstance.Canvases.Add (lcName, lcCanvas);
-			Debug.Log ("I added a canvas " + lcName);
-		} else {
-			Debug.Log ("Canvas " + lcName + " not added");
-		}
-	}
+	//	// Do we ned to check if we already have this name?
+	//	if (GameManager.GameManagerInstance != null & GameManager.GameManagerInstance.Canvases == null) {
+	//		GameManager.GameManagerInstance.Canvases.Add (lcName, lcCanvas);
+	//		Debug.Log ("I added a canvas " + lcName);
+	//	} else {
+	//		Debug.Log ("Canvas " + lcName + " not added");
+	//	}
+	//}
 }

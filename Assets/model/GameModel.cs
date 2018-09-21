@@ -5,20 +5,29 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
+[Serializable]
 public class GameModel
 {
-
     //private static String _name = "Bro";
 
     //holds current player object
-    private static Player _currentPlayer = new Player();
+    private Player _currentPlayer = new Player();
     public enum DIRECTION { North, South, East, West };
     //private static Area _startArea; // ??
-    //public static Players PlayersInGame = new Players();
+    private Players _playersInGame = new Players();
+
+    AreaChristChurchSteps christChurchSteps;
+    AreaStarbucks starbucks;
+    AreaNMIT nmit;
+    AreaNewWorld newWorld;
+    AreaStateCinemas stateCinemas;
 
     public GameModel()
     {
-        MakeAreas();
+        if (_currentPlayer.CurrentArea == null)
+        {
+            MakeAreas();
+        }
     }
 
     //public static Area StartArea
@@ -47,7 +56,7 @@ public class GameModel
 
     //}
 
-    public static Player CurrentPlayer
+    public Player CurrentPlayer
     {
         get
         {
@@ -59,34 +68,49 @@ public class GameModel
         }
 
     }
-    public static void go(DIRECTION pDirection)
+
+    public Players PlayersInGame
+    {
+        get
+        {
+            return _playersInGame;
+        }
+
+        set
+        {
+            _playersInGame = value;
+        }
+    }
+
+    public void Go(DIRECTION pDirection)
     {
         _currentPlayer.Move(pDirection);
     }
 
-    public static void Pickup(Item prItem)
+    public void Pickup(Item prItem)
     {
-        CurrentPlayer.LstInventory.Add(prItem);
+        _currentPlayer.LstInventory.Add(prItem);
     }
 
-    public static void RemoveItemFromArea(Item prItem)
+    public  void RemoveItemFromArea(Item prItem)
     {
-        CurrentPlayer.CurrentArea.AreaObject = null;
+        _currentPlayer.CurrentArea.AreaObject = null;
     }
 
 
 
 
-    public static void MakeAreas()
+    public void MakeAreas()
     {
         //instantiates area objects
-        areaChristChurchSteps christChurchSteps = new areaChristChurchSteps();
-        areaStarbucks starbucks = new areaStarbucks();
-        areaNMIT NMIT = new areaNMIT();
-        areaNewWorld newWorld = new areaNewWorld();
-        areaStateCinemas stateCinemas = new areaStateCinemas();
+        AreaChristChurchSteps christChurchSteps = new AreaChristChurchSteps();
+        AreaStarbucks starbucks = new AreaStarbucks();
+        AreaNMIT NMIT = new AreaNMIT();
+        AreaNewWorld newWorld = new AreaNewWorld();
+        AreaStateCinemas stateCinemas = new AreaStateCinemas();
 
         //sets the current scene, note this also stores all related scenes as they are connected through the 'memory pointers' within the object
+        
         _currentPlayer.CurrentArea = christChurchSteps;
 
         //Christ Church Steps (Start Scene)
@@ -150,7 +174,6 @@ public class GameModel
         stateCinemas.South = starbucks;
         stateCinemas.East = null;
         stateCinemas.West = null;
-
     }
 }
 

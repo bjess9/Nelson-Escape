@@ -9,8 +9,8 @@ public class focusInput : MonoBehaviour {
 
     // focuses input field for the user
 	void Start () {
-		InputField focusMe = gameObject.GetComponent<InputField> ();
-		focusMe.ActivateInputField ();
+		InputField lcFocusMe = gameObject.GetComponent<InputField> ();
+		lcFocusMe.ActivateInputField ();
 	}
 	
 

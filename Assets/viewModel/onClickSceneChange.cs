@@ -5,19 +5,19 @@ using UnityEngine.SceneManagement;
 
 public class onClickSceneChange : MonoBehaviour {
 
-    public void LoadScene(string pSceneName)
+    public void LoadScene(string prSceneName)
     {
         //code for changing scene on click
-        if(pSceneName == "menu")
+        if(prSceneName == "menu")
         {
-            GameModel.CurrentPlayer.LstInventory.Clear();
+            
+            GameManager.GameManagerInstance.GameModelInstance.CurrentPlayer.LstInventory.Clear();
+            GameManager.GameManagerInstance.GameModelInstance.MakeAreas();
         }
-        SceneManager.LoadScene(pSceneName);
-
-
+        SceneManager.LoadScene(prSceneName);
     }
 
-    public void quitGame()
+    public void QuitGame()
     {
         Application.Quit();
     }

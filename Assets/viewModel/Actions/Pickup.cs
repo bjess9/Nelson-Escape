@@ -1,20 +1,21 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pickup : Action  {
+[Serializable]
+public class Pickup : PlayerAction  {
 
     public Pickup()
     {
         DisplayName = "pick up";
     }
 
-    public static void pickupItem()
+    public static void PickupItem(GameModel prGameModel, Area prCurrentArea)
     {
         //picking up an item then removing it from the scene
-        GameModel.Pickup(GameModel.CurrentPlayer.CurrentArea.AreaObject);
-        GameModel.RemoveItemFromArea(GameModel.CurrentPlayer.CurrentArea.AreaObject);
-
+        prGameModel.Pickup(prCurrentArea.AreaObject);
+        prGameModel.RemoveItemFromArea(prCurrentArea.AreaObject);
         //DisplayName = "pick up";
     }
 }

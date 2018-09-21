@@ -1,13 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class areaChristChurchSteps : Area
+[Serializable]
+public class AreaChristChurchSteps : Area
 {
-    //public areaChristChurchSteps()
-    //{
-
-    //}
-
 
 }

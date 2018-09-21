@@ -166,3 +166,5 @@ C:\Users\ThinkPad_T440p\Google Drive\Yr 2\Semester 2\SDV602\Nelson Escape\obj\De
 C:\Users\ThinkPad_T440p\Google Drive\Yr 2\Semester 2\SDV602\Nelson Escape\obj\Debug\Assembly-CSharp.csproj.CopyComplete
 C:\Users\ThinkPad_T440p\Google Drive\Yr 2\Semester 2\SDV602\Nelson Escape\obj\Debug\Assembly-CSharp.dll
 C:\Users\ThinkPad_T440p\Google Drive\Yr 2\Semester 2\SDV602\Nelson Escape\obj\Debug\Assembly-CSharp.pdb
+C:\Users\ThinkPad_T440p\Google Drive\Yr 2\Semester 2\SDV602\Nelson Escape\Temp\bin\Debug\UnityEngine.SpatialTrackingModule.dll
+C:\Users\ThinkPad_T440p\Google Drive\Yr 2\Semester 2\SDV602\Nelson Escape\Temp\bin\Debug\UnityEngine.SpatialTrackingModule.xml

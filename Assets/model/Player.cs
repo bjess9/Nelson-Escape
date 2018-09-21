@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 
+[Serializable]
 public class Player
 {
     // Class
-    //private static int _player_number = 0;
+    private static int _playerNumber = 0;
 
     // Instance
-    //private int _number = (Player._player_number++);
-    //private string _name;
+    private int _number = (Player._playerNumber++);
+    private string _name = "bob"; //default name before login implemented
 
     // list of items in the players inventory
     private List<Item> _lstInventory = new List<Item>();
@@ -29,17 +30,17 @@ public class Player
         }
     }
 
-    //public String Name
-    //{
-    //    get
-    //    {
-    //        return _name;
-    //    }
-    //    set
-    //    {
-    //        _name = value;
-    //    }
-    //}
+    public String Name
+    {
+        get
+        {
+            return _name;
+        }
+        set
+        {
+            _name = value;
+        }
+    }
 
     //public bool Caffeinated
     //{
@@ -99,9 +100,6 @@ public class Player
                 break;
         }
     }
-    //public Player()
-    //{
-    //}
 }
 
 

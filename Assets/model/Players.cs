@@ -3,11 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 using System.IO;
-
+[Serializable]
 	public class Players
 	{
-        // this class is currently not implemented
-
 	   private List<Player> _players = new List<Player>();
 
 	   public Player this[int index] 
@@ -21,11 +19,6 @@ using System.IO;
 				_players[index] = value;
 			}
 	    }
-
-	    public Players ()
-		{
-		
-		}
 	}
 
 

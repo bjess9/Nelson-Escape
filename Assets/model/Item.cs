@@ -1,7 +1,7 @@
 ﻿using System;
 
-
-	public class Item
+[Serializable]
+public class Item
 	{
         //item description text
 		private string _description;

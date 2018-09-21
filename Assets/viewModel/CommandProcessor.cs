@@ -1,11 +1,7 @@
 ﻿using System;
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
 
-using System.IO;
-
-public delegate void aDisplayer(String value);
+public delegate void aDisplayer(String prValue);
 
 public class CommandProcessor
 {
@@ -13,230 +9,239 @@ public class CommandProcessor
     {
     }
 
-    public void Parse(String pCmdStr, aDisplayer display)
+    public string[] Parse(String prCmdStr, Player prCurrentPlayer)
     {
         // default display
-        String strResult = "Do not understand";
+        string lcStrResult = "Do not understand";
+        string lcDebugText = "";
 
         //seperating input by spaces and putting into an array for processing
-        char[] charSeparators = new char[] { ' ' };
-        pCmdStr = pCmdStr.ToLower();
-        String[] parts = pCmdStr.Split(charSeparators, StringSplitOptions.RemoveEmptyEntries); // tokenise the command
+        char[] lcCharSeparators = new char[] { ' ' };
+        prCmdStr = prCmdStr.ToLower();
+        String[] lcParts = prCmdStr.Split(lcCharSeparators, StringSplitOptions.RemoveEmptyEntries); // tokenise the command
 
-        if (parts.Length > 0)
+        if (lcParts.Length > 0)
         {
-            switch (parts[0])
+            switch (lcParts[0])
             {//first condition logic
                 case "pick":
-                    if (parts[1] == "up")
+                    if (lcParts[1] == "up")
                     {
                         Debug.Log("Got Pick up");
-                        if (GameModel.CurrentPlayer.CurrentArea.AreaObject != null)
+                        if (prCurrentPlayer.CurrentArea.AreaObject != null)
                         {
-                            strResult = GameModel.CurrentPlayer.CurrentArea.DcStory["postPickup"];
+                            lcStrResult = prCurrentPlayer.CurrentArea.DcStory["postPickup"];
 
                             //removes pickup action from scene if an object is picked up
-                            foreach (Action action in GameModel.CurrentPlayer.CurrentArea.LstDecisions)
-                                if (Action.DisplayName == "pick up")
+                            foreach (PlayerAction lcAction in prCurrentPlayer.CurrentArea.LstDecisions)
+                                if (PlayerAction.DisplayName == "pick up")
                                 {
-                                    GameModel.CurrentPlayer.CurrentArea.LstDecisions.Remove(action);
+                                    prCurrentPlayer.CurrentArea.LstDecisions.Remove(lcAction);
                                     break;
                                 }
 
                             //adds displaydecisions result to current output 
-                            strResult = strResult + DisplayDecisions();
+                            lcStrResult = lcStrResult + DisplayDecisions(prCurrentPlayer);
 
                             //picks up item
-                            Pickup.pickupItem();
+                            Pickup.PickupItem(GameManager.GameManagerInstance.GameModelInstance, prCurrentPlayer.CurrentArea);
                         }
                         else
                         {
-                            strResult = "There is nothing to pick up";
-                            strResult = strResult + logicForDisplay();
+                            lcStrResult = "There is nothing to pick up";
+                            lcStrResult = lcStrResult + LogicForDisplay(prCurrentPlayer);
                         }
 
-                        if (parts.Length == 3)
+                        if (lcParts.Length == 3)
                         {
-                            String param = parts[2];
+                            String lcParam = lcParts[2];
                         }
                     }
-                    display(strResult);
+                    
                     break;
                 case "go":
-                    switch (parts[1])
+                    switch (lcParts[1])
                     {
                         case "north":
-                            Debug.Log("Got go North");
-                            setVisitedToTrueIfFirstTime();
+                            lcDebugText = "Got go North";
+                            SetVisitedToTrueIfFirstTime(prCurrentPlayer);
                             //only attempts to go north if there is an area connected to the north direction
-                            if (GameModel.CurrentPlayer.CurrentArea.North != null)
+                            if (prCurrentPlayer.CurrentArea.North != null)
                             {
-                                GameModel.go(GameModel.DIRECTION.North);
-                                strResult = logicForDisplay();
+                                GameManager.GameManagerInstance.GameModelInstance.Go(GameModel.DIRECTION.North);
+                                lcStrResult = LogicForDisplay(prCurrentPlayer);
                             }
                             else
                             {
-                                strResult = "You can't go in that direction";
+                                lcStrResult = "You can't go in that direction";
                             }
 
                             break;
                         case "south":
-                            Debug.Log("Got go South");
-                            setVisitedToTrueIfFirstTime();
-                            if (GameModel.CurrentPlayer.CurrentArea.South != null)
+                            lcDebugText = "Got go South";
+                            SetVisitedToTrueIfFirstTime(prCurrentPlayer);
+                            if (prCurrentPlayer.CurrentArea.South != null)
                             {
-                                GameModel.go(GameModel.DIRECTION.South);
-                                strResult = logicForDisplay();
+                                GameManager.GameManagerInstance.GameModelInstance.Go(GameModel.DIRECTION.South);
+                                lcStrResult = LogicForDisplay(prCurrentPlayer);
                             }
                             else
                             {
-                                strResult = "You can't go in that direction";
+                                lcStrResult = "You can't go in that direction";
                             }
 
                             break;
                         case "east":
-                            Debug.Log("Got go East");
-                            setVisitedToTrueIfFirstTime();
-                            if (GameModel.CurrentPlayer.CurrentArea.East != null)
+                            lcDebugText = "Got go East";
+                            SetVisitedToTrueIfFirstTime(prCurrentPlayer);
+                            if (prCurrentPlayer.CurrentArea.East != null)
                             {
-                                GameModel.go(GameModel.DIRECTION.East);
-                                strResult = logicForDisplay();
+                                GameManager.GameManagerInstance.GameModelInstance.Go(GameModel.DIRECTION.East);
+                                lcStrResult = LogicForDisplay(prCurrentPlayer);
                             }
                             else
                             {
-                                strResult = "You can't go in that direction";
+                                lcStrResult = "You can't go in that direction";
                             }
 
                             break;
                         case "west":
-                            Debug.Log("Got go West");
-                            setVisitedToTrueIfFirstTime();
-                            if (GameModel.CurrentPlayer.CurrentArea.West != null)
+                            lcDebugText = "Got go West";
+                            SetVisitedToTrueIfFirstTime(prCurrentPlayer);
+                            if (prCurrentPlayer.CurrentArea.West != null)
                             {
-                                GameModel.go(GameModel.DIRECTION.West);
-                                strResult = logicForDisplay();
+                                GameManager.GameManagerInstance.GameModelInstance.Go(GameModel.DIRECTION.West);
+                                lcStrResult = LogicForDisplay(prCurrentPlayer);
                             }
                             else
                             {
-                                strResult = "You can't go in that direction";
+                                lcStrResult = "You can't go in that direction";
                             }
                             break;
                         default:
-                            Debug.Log(" do not know how to go there");
-                            strResult = "Do not know how to go there";
+                            lcDebugText = " do not know how to go there";
+                            lcStrResult = "Do not know how to go there";
                             break;
 
                     }
-                    display(strResult);
+                    
                     break;
                 case "show"://shows canvas using text input
-                    switch (parts[1])
+                    switch (lcParts[1])
                     {
                     
                         case "story":
-                            GameManager.GameManagerInstance.setActiveCanvas("cnvStory");
-                            strResult = logicForDisplay();
+                            GameManager.GameManagerInstance.SetActiveCanvas("cnvStory");
+                            lcStrResult = LogicForDisplay(prCurrentPlayer);
                             break;
                         case "inventory":
-                            GameManager.GameManagerInstance.setActiveCanvas("cnvInventory");
+                            GameManager.GameManagerInstance.SetActiveCanvas("cnvInventory");
                             break;
                         case "map":
-                            GameManager.GameManagerInstance.setActiveCanvas("cnvMap");
+                            GameManager.GameManagerInstance.SetActiveCanvas("cnvMap");
                             break;
                     }
+                    
+                    break;
 
-                    //call function from scene inherited scene object, two types of scenes
-                    // yes/no scene
-                    // pickup item scene
+                case "save"://saving game state
+                    saveLoad lcSaveInstance = new saveLoad();
+                    lcSaveInstance.Save();
+                    lcStrResult = LogicForDisplay(prCurrentPlayer);
+                    lcSaveInstance = null;
+                    break;
 
-                    // yes/no displays different text upon yes or no
-                    // pick up simply places item in your inventory array
-
-                    //if (GameManager.instance.activeCanvas == cnvStory)
-
-                    display(strResult);
+                case "load"://loading previously saved game state
+                    saveLoad lcLoadInstance = new saveLoad();
+                    lcLoadInstance.Load();
+                    lcStrResult = LogicForDisplay(prCurrentPlayer);
+                    lcLoadInstance = null;
                     break;
                 default:
-                    Debug.Log("Do not understand");
-                    strResult = "Do not understand";
+                    lcDebugText = "Do not understand";
+                    lcStrResult = "Do not understand";
                     break;
 
             }// end switch
         }
-        // return strResult;
+        string[] lcOutput = { lcStrResult, lcDebugText };
+        return lcOutput;
 
     }// Parse
 
     //changes visited flag
-    private static void setVisitedToTrueIfFirstTime()
+    private static void SetVisitedToTrueIfFirstTime(Player prCurrentPlayer)
     {
-        if (GameModel.CurrentPlayer.CurrentArea.Visited != true)
+        if (prCurrentPlayer.CurrentArea.Visited != true)
         {
-            GameModel.CurrentPlayer.CurrentArea.Visited = true;
+            prCurrentPlayer.CurrentArea.Visited = true;
         }
     }
 
     //logic for the story text output
-    private static string logicForDisplay()
+    public static string LogicForDisplay(Player prCurrentPlayer)
     {
-        string strResult;
-        if (GameModel.CurrentPlayer.CurrentArea.Visited != true & GameModel.CurrentPlayer.CurrentArea.AreaObject == null)
+        string lcStrResult;
+        if (prCurrentPlayer.CurrentArea.Visited != true & prCurrentPlayer.CurrentArea.AreaObject == null)
         {
             
-            strResult = GameModel.CurrentPlayer.CurrentArea.DcStory["defaultFirstVisit"];
-            strResult = strResult + DisplayDecisions();
+            lcStrResult = prCurrentPlayer.CurrentArea.DcStory["defaultFirstVisit"];
+            lcStrResult = lcStrResult + DisplayDecisions(prCurrentPlayer);
         }
-        else if (GameModel.CurrentPlayer.CurrentArea.AreaObject == null & GameModel.CurrentPlayer.CurrentArea.Visited == true)
+        else if (prCurrentPlayer.CurrentArea.AreaObject == null & prCurrentPlayer.CurrentArea.Visited == true)
         {
-            strResult = GameModel.CurrentPlayer.CurrentArea.DcStory["default"];
-            strResult = strResult + DisplayDecisions();
+            lcStrResult = prCurrentPlayer.CurrentArea.DcStory["default"];
+            lcStrResult = lcStrResult + DisplayDecisions(prCurrentPlayer);
         }
-        else if (GameModel.CurrentPlayer.CurrentArea.AreaObject != null)
+        else if (prCurrentPlayer.CurrentArea.AreaObject != null)
         {
-            strResult = GameModel.CurrentPlayer.CurrentArea.DcStory["prePickup"];
-            strResult = strResult + DisplayDecisions();
+            lcStrResult = prCurrentPlayer.CurrentArea.DcStory["prePickup"];
+            lcStrResult = lcStrResult + DisplayDecisions(prCurrentPlayer);
         }
         else
         {
-            strResult = "Something is broken with the logicForDisplay() method.";
-            strResult = strResult + DisplayDecisions();
+            lcStrResult = "Something is broken with the logicForDisplay() method.";
+            lcStrResult = lcStrResult + DisplayDecisions(prCurrentPlayer);
         }
-        return strResult;
+        return lcStrResult;
     }
 
     //logic for the text pertaining to what actions you can make and directions you can go in
-    public static string DisplayDecisions()
+    public static string DisplayDecisions(Player prCurrentPlayer)
     {
 
-        string decisionOutput = "\n" + "\n" + "You can make these decisions:" + "\n";
-        foreach (Action action in GameModel.CurrentPlayer.CurrentArea.LstDecisions)
+        string lcDecisionOutput = "\n" + "\n" + "You can make these decisions:" + "\n";
+        foreach (PlayerAction lcAction in prCurrentPlayer.CurrentArea.LstDecisions)
         {
-            decisionOutput = decisionOutput + "\n" + action.returnDisplayName();
+            lcDecisionOutput = lcDecisionOutput + "\n" + lcAction.ReturnDisplayName();
         }
 
-        decisionOutput = decisionOutput + "\n" + "\n" + "Possible Direction:";
+        
+        lcDecisionOutput = lcDecisionOutput + "\n" + "\n" + "Possible Direction:";
 
-        if (GameModel.CurrentPlayer.CurrentArea.North != null)
+
+        //turn into loop
+        if (prCurrentPlayer.CurrentArea.North != null)
         {
-            decisionOutput = decisionOutput + "\n" + "go north";
+            lcDecisionOutput = lcDecisionOutput + "\n" + "go north";
         }
 
-        if (GameModel.CurrentPlayer.CurrentArea.South != null)
+        if (prCurrentPlayer.CurrentArea.South != null)
         {
-            decisionOutput = decisionOutput + "\n" + "go south";
+            lcDecisionOutput = lcDecisionOutput + "\n" + "go south";
         }
 
-        if (GameModel.CurrentPlayer.CurrentArea.East != null)
+        if (prCurrentPlayer.CurrentArea.East != null)
         {
-            decisionOutput = decisionOutput + "\n" + "go east";
+            lcDecisionOutput = lcDecisionOutput + "\n" + "go east";
         }
 
-        if (GameModel.CurrentPlayer.CurrentArea.West != null)
+        if (prCurrentPlayer.CurrentArea.West != null)
         {
-            decisionOutput = decisionOutput + "\n" + "go west";
+            lcDecisionOutput = lcDecisionOutput + "\n" + "go west";
         }
 
-        return decisionOutput;
+        return lcDecisionOutput;
     }
 }
 

@@ -1,34 +1,36 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Action
+[Serializable]
+public abstract class PlayerAction
 {
 
     //display name for an action, this is the text that will be displayed to the user in the story
-    private static string displayName;
+    private static string _displayName;
 
     public static string DisplayName
     {
         get
         {
-            return displayName;
+            return _displayName;
         }
 
         set
         {
-             displayName = value;
+             _displayName = value;
         }
     }
 
-    public string returnDisplayName()
+    public string ReturnDisplayName()
     {
-        return displayName;
+        return _displayName;
     }
 
-    public void setDisplayName(string prName)
+    public void SetDisplayName(string prName)
     {
-        displayName = prName;
+        _displayName = prName;
     }
 
 }

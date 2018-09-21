@@ -61,6 +61,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\loginLogout.cs" />
     <Compile Include="Assets\model\Areas\Area.cs" />
     <Compile Include="Assets\model\Areas\areaChristChurchSteps.cs" />
     <Compile Include="Assets\model\Areas\areaCombat.cs" />
@@ -68,10 +69,18 @@
     <Compile Include="Assets\model\Areas\areaNMIT.cs" />
     <Compile Include="Assets\model\Areas\areaStarbucks.cs" />
     <Compile Include="Assets\model\Areas\areaStateCinemas.cs" />
+    <Compile Include="Assets\model\Areas\NewBehaviourScript.cs" />
+    <Compile Include="Assets\model\Database\CreateDBScript.cs" />
+    <Compile Include="Assets\model\Database\DataService.cs" />
+    <Compile Include="Assets\model\Database\ExistingDBScript.cs" />
+    <Compile Include="Assets\model\Database\Person.cs" />
+    <Compile Include="Assets\model\Database\SQLite.cs" />
     <Compile Include="Assets\model\GameModel.cs" />
     <Compile Include="Assets\model\Item.cs" />
     <Compile Include="Assets\model\Player.cs" />
     <Compile Include="Assets\model\Players.cs" />
+    <Compile Include="Assets\saveLoad.cs" />
+    <Compile Include="Assets\updateHealthUI.cs" />
     <Compile Include="Assets\viewModel\Actions\Action.cs" />
     <Compile Include="Assets\viewModel\Actions\Pickup.cs" />
     <Compile Include="Assets\viewModel\CommandProcessor.cs" />
@@ -81,9 +90,8 @@
     <Compile Include="Assets\viewModel\inventoryOutput.cs" />
     <Compile Include="Assets\viewModel\LoadOnClickCanvas.cs" />
     <Compile Include="Assets\viewModel\onClickSceneChange.cs" />
-    <Compile Include="Assets\viewModel\RunOnlyOnce.cs" />
     <Compile Include="Assets\viewModel\SetActiveCanvas.cs" />
-    <Compile Include="Assets\viewModel\TextInput.cs" />
+    <Compile Include="Assets\viewModel\TextIO.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/ThinkPad_T440p/Google Drive/Yr 2/Semester 2/SDV602/Nelson Escape/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>

@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class areaNewWorld : Area
+[Serializable]
+public class AreaNewWorld : Area
 {
-    public areaNewWorld()
+    public AreaNewWorld()
     {
         //Item AreaObject = new Item();
         //AreaObject.Description = "Flute";

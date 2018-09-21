@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class areaStarbucks : Area
+[Serializable]
+public class AreaStarbucks : Area
 {
-    public areaStarbucks()
+    public AreaStarbucks()
     {
         //Item AreaObject = new Item();
         //AreaObject.Description = "$5";

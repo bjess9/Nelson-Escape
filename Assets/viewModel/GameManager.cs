@@ -9,87 +9,63 @@ public class GameManager : MonoBehaviour
 {
 
     //game manager instance
-    private static GameManager gameManager;
+    private static GameManager _gameManagerInstance;
 
     //flag to indicate that the game is running
-    private bool gameRunning;
+    private bool _gameRunning;
 
     //game model instance
-    public GameModel gameModel;
+    private GameModel _gameModelInstance;
 
     //canvas variables
-    public Canvas activeCanvas;
-    public Canvas cnvStory;
-    public Canvas cnvInventory;
-    public Canvas cnvMap;
-    private Dictionary<string, Canvas> canvases;
+    public Canvas ActiveCanvas;
+    public Canvas CnvStory;
+    public Canvas CnvInventory;
+    public Canvas CnvMap;
+    public Dictionary<string, Canvas> Canvases;
 
-    public Dictionary<string, Canvas> Canvases
-    {
-        get
-        {
-            return canvases;
-        }
-
-        set
-        {
-            canvases = value;
-        }
-    }
-
-    public static GameManager GameManagerInstance
-    {
-        get
-        {
-            return gameManager;
-        }
-
-        set
-        {
-            gameManager = value;
-        }
-    }
-
-    public void setActiveCanvas(string prName)
+    public void SetActiveCanvas(string prCnvName)
     {
 
-        if (Canvases.ContainsKey(prName))
+        if (Canvases.ContainsKey(prCnvName))
         {
 
             // set all to not active;
-            foreach (Canvas acanvas in Canvases.Values)
+            foreach (Canvas lcCanvas in Canvases.Values)
             {
-                acanvas.gameObject.SetActive(false);
+                lcCanvas.gameObject.SetActive(false);
             }
-            activeCanvas = Canvases[prName];
-            Debug.Log("I am the active one " + prName);
+            ActiveCanvas = Canvases[prCnvName];
+            Debug.Log("I am the active one " + prCnvName);
             //sets active canvas
-            activeCanvas.gameObject.SetActive(true);
+            ActiveCanvas.gameObject.SetActive(true);
         }
         else
         {
-            Debug.Log("I can not find " + prName + " to make active.");
+            Debug.Log("I can not find " + prCnvName + " to make active.");
         }
 
-        Canvas[] tempCanvases = gameObject.GetComponentsInChildren<Canvas>();
+        Canvas[] lcTempCanvases = gameObject.GetComponentsInChildren<Canvas>();
 
-        foreach (Canvas aCvn in tempCanvases)
+        foreach (Canvas lcCanvas in lcTempCanvases)
         {
-            if (aCvn.name != prName)
+            if (lcCanvas.name != prCnvName)
             {
-                aCvn.gameObject.SetActive(false);
+                lcCanvas.gameObject.SetActive(false);
             }
         }
     }
-    public string currentUScene()
+    public string CurrentUScene()
     {
         return UManager.SceneManager.GetActiveScene().name;
     }
 
-    public void changeUScene(string pSceneName)
+    public void ChangeUScene(string prSceneName)
     {
-        UManager.SceneManager.LoadScene(pSceneName);
+        UManager.SceneManager.LoadScene(prSceneName);
     }
+
+    //print to debug log method
 
     void Awake()
     {
@@ -97,10 +73,10 @@ public class GameManager : MonoBehaviour
         if (GameManagerInstance == null)
         {
             GameManagerInstance = this;
-            gameRunning = true;
+            _gameRunning = true;
             Debug.Log("I am the one");
             //instantiates the game model
-            gameModel = new GameModel();
+            GameModelInstance = new GameModel();
             //canvases = new Dictionary<string,Canvas> ();
         }
         else
@@ -112,14 +88,46 @@ public class GameManager : MonoBehaviour
         if (Canvases == null)
         {
             Canvases = new Dictionary<string, Canvas>();
-            Canvases["cnvStory"] = cnvStory;
-            Canvases["cnvInventory"] = cnvInventory;
-            Canvases["cnvMap"] = cnvMap;
+            Canvases["cnvStory"] = CnvStory;
+            Canvases["cnvInventory"] = CnvInventory;
+            Canvases["cnvMap"] = CnvMap;
         }
     }
 
+
+
+    public static GameManager GameManagerInstance
+    {
+        get
+        {
+            return _gameManagerInstance;
+        }
+
+        set
+        {
+            _gameManagerInstance = value;
+        }
+    }
+
+    public GameModel GameModelInstance
+    {
+        get
+        {
+            return _gameModelInstance;
+        }
+
+        set
+        {
+            _gameModelInstance = value;
+        }
+    }
+
+
+
+
+
     public bool IsGameRunning()
     {
-        return gameRunning;
+        return _gameRunning;
     }
 }

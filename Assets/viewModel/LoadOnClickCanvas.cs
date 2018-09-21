@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class LoadOnClickCanvas : MonoBehaviour {
 
-    public void ChangeCanvas(Canvas pCanvas)
+    public void ChangeCanvas(Canvas prCanvas)
     {
         //code for changing canvas on click of button
-        pCanvas.gameObject.SetActive(true);
+        prCanvas.gameObject.SetActive(true);
 
-        Canvas[] canvases = gameObject.GetComponentsInChildren<Canvas>();
+        Canvas[] lcCanvases = gameObject.GetComponentsInChildren<Canvas>();
 
-        foreach(Canvas aCvn in canvases){
-            if(aCvn.name != pCanvas.name)
+        foreach(Canvas lcCanvas in lcCanvases){
+            if(lcCanvas.name != prCanvas.name)
             {
-                aCvn.gameObject.SetActive(false);
+                lcCanvas.gameObject.SetActive(false);
             }
         }
     }

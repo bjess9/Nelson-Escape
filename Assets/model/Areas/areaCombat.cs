@@ -1,8 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class areaCombat : Area
+[Serializable]
+public class AreaCombat : Area
 {
     //public areaCombat()
     //{

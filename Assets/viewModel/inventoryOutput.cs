@@ -7,23 +7,23 @@ public class inventoryOutput : MonoBehaviour
 {
     // code for output to inventory screen
 
-    public Text output;
+    public Text _output;
 
     void Update()
     {
-        if (GameModel.CurrentPlayer.LstInventory != null)
+        if (GameManager.GameManagerInstance.GameModelInstance.CurrentPlayer.LstInventory != null)
         {
-            output.text = null;
-            foreach (Item prItem in GameModel.CurrentPlayer.LstInventory)
+            _output.text = null;
+            foreach (Item prItem in GameManager.GameManagerInstance.GameModelInstance.CurrentPlayer.LstInventory)
             {
                 //displays an items description on each line
-                output.text = output.text + "\n" + prItem.Description;
+                _output.text = _output.text + "\n" + prItem.Description;
             }
         }
         else
         {
             //display if inven is empty, not working yet
-            output.text = "Your inventory is empty!";
+            _output.text = "Your inventory is empty!";
         }
     }
 }

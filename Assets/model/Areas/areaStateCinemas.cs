@@ -1,8 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class areaStateCinemas : Area
+[Serializable]
+public class AreaStateCinemas : Area
 {
     //public areaStateCinemas()
     //{

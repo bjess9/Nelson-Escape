@@ -10,6 +10,6 @@ public class SetActiveCanvas : MonoBehaviour {
 		Canvas lcCanvas = lcCanvases [0];
 		string lcName = lcCanvas.name;
         if (GameManager.GameManagerInstance != null)
-            GameManager.GameManagerInstance.setActiveCanvas(lcName);
+            GameManager.GameManagerInstance.SetActiveCanvas(lcName);
 	}
 }
