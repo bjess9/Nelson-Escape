@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "874356689016",
+    "firebase_url": "https://nelson-escape.firebaseio.com",
+    "project_id": "nelson-escape",
+    "storage_bucket": "nelson-escape.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:874356689016:android:1e415510de336d12",
+        "android_client_info": {
+          "package_name": "com.nelsonescape.nelsonescape"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "874356689016-5etrqabgpv0tnsch7nble38pjp7edsop.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1uQRST6QQxmXfgAWb6vgWb0UN5G0-R8Q"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

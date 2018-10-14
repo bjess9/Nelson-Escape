@@ -168,3 +168,11 @@ C:\Users\ThinkPad_T440p\Google Drive\Yr 2\Semester 2\SDV602\Nelson Escape\obj\De
 C:\Users\ThinkPad_T440p\Google Drive\Yr 2\Semester 2\SDV602\Nelson Escape\obj\Debug\Assembly-CSharp.pdb
 C:\Users\ThinkPad_T440p\Google Drive\Yr 2\Semester 2\SDV602\Nelson Escape\Temp\bin\Debug\UnityEngine.SpatialTrackingModule.dll
 C:\Users\ThinkPad_T440p\Google Drive\Yr 2\Semester 2\SDV602\Nelson Escape\Temp\bin\Debug\UnityEngine.SpatialTrackingModule.xml
+C:\Users\ThinkPad_T440p\Google Drive\Yr 2\Semester 2\SDV602\Nelson Escape\Temp\bin\Debug\Firebase.App.dll
+C:\Users\ThinkPad_T440p\Google Drive\Yr 2\Semester 2\SDV602\Nelson Escape\Temp\bin\Debug\Firebase.Auth.dll
+C:\Users\ThinkPad_T440p\Google Drive\Yr 2\Semester 2\SDV602\Nelson Escape\Temp\bin\Debug\Firebase.Database.dll
+C:\Users\ThinkPad_T440p\Google Drive\Yr 2\Semester 2\SDV602\Nelson Escape\Temp\bin\Debug\Firebase.Platform.dll
+C:\Users\ThinkPad_T440p\Google Drive\Yr 2\Semester 2\SDV602\Nelson Escape\Temp\bin\Debug\Google.MiniJson.dll
+C:\Users\ThinkPad_T440p\Google Drive\Yr 2\Semester 2\SDV602\Nelson Escape\Temp\bin\Debug\Google.Sharpen.dll
+C:\Users\ThinkPad_T440p\Google Drive\Yr 2\Semester 2\SDV602\Nelson Escape\Temp\bin\Debug\Unity.Compat.dll
+C:\Users\ThinkPad_T440p\Google Drive\Yr 2\Semester 2\SDV602\Nelson Escape\Temp\bin\Debug\Unity.Tasks.dll
