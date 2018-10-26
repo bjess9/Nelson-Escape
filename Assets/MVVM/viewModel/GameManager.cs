@@ -8,24 +8,17 @@ using Firebase.Database;
 using Firebase.Unity.Editor;
 
 public enum DIRECTION { North, South, East, West };
-public enum ACTION { Pickup, Yes, No, Attack, Flee };
-
-
 
 public class GameManager : MonoBehaviour
 {
-
     //game manager instance
-    private static GameManager _gameManagerInstance;
+    private static GameManager _gameManagerInstance = null;
 
     //flag to indicate that the game is running
     private bool _gameRunning;
 
     //game model instance
-    private GameModel _gameModelInstance;
-
-    //firebase connection object
-   
+    private GameModel _gameModelInstance = null;
 
     //canvas variables
     public Canvas ActiveCanvas;
@@ -33,6 +26,9 @@ public class GameManager : MonoBehaviour
     public Canvas CnvInventory;
     public Canvas CnvMap;
     public Dictionary<string, Canvas> Canvases;
+
+    //public Text MapButtonText;
+    //public Text InventoryButtonText;
 
     //public static DatabaseReference mDatabaseRef;
 
@@ -47,15 +43,13 @@ public class GameManager : MonoBehaviour
     //    string json = JsonUtility.ToJson(lcPlayer);
 
     //    reference.Child("Users").Child(prUserName).SetRawJsonValueAsync(json);
-
     //}
 
     public void SetActiveCanvas(string prCnvName)
     {
-
+        
         if (Canvases.ContainsKey(prCnvName))
         {
-
             // set all to not active;
             foreach (Canvas lcCanvas in Canvases.Values)
             {
@@ -92,20 +86,20 @@ public class GameManager : MonoBehaviour
 
     }
 
-    //print to debug log method
-
+    /// <summary>
+    /// sets the gamemanager instance to exist as a singleton, no copies permitted of this object
+    /// </summary>
     void Awake()
     {
-     
-
-
+        
         if (GameManagerInstance == null)
         {
             GameManagerInstance = this;
+            GameModelInstance = new GameModel();
             _gameRunning = true;
             Debug.Log("I am the one");
             //instantiates the game model
-            GameModelInstance = new GameModel();
+            
             //canvases = new Dictionary<string,Canvas> ();
         }
         else
@@ -150,8 +144,6 @@ public class GameManager : MonoBehaviour
             _gameModelInstance = value;
         }
     }
-
-
 
     public bool IsGameRunning()
     {

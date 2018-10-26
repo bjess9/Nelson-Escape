@@ -61,31 +61,34 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\MVVM\loginLogout.cs" />
-    <Compile Include="Assets\MVVM\model\Area\Area.cs" />
-    <Compile Include="Assets\MVVM\model\Area\AreaElements.cs" />
-    <Compile Include="Assets\MVVM\model\Area\Story.cs" />
-    <Compile Include="Assets\MVVM\model\Element.cs" />
     <Compile Include="Assets\MVVM\model\GameModel.cs" />
-    <Compile Include="Assets\MVVM\model\Item.cs" />
-    <Compile Include="Assets\MVVM\model\NPC.cs" />
     <Compile Include="Assets\MVVM\model\Player.cs" />
     <Compile Include="Assets\MVVM\model\Players.cs" />
-    <Compile Include="Assets\MVVM\updateHealthUI.cs" />
+    <Compile Include="Assets\MVVM\model\SQLite\DataService.cs" />
+    <Compile Include="Assets\MVVM\model\SQLite\SQLite.cs" />
+    <Compile Include="Assets\MVVM\model\tables\TableArea.cs" />
+    <Compile Include="Assets\MVVM\model\tables\TableAreaItem.cs" />
+    <Compile Include="Assets\MVVM\model\tables\TableInventory.cs" />
+    <Compile Include="Assets\MVVM\model\tables\TableItem.cs" />
+    <Compile Include="Assets\MVVM\model\tables\TableNPC.cs" />
+    <Compile Include="Assets\MVVM\model\tables\TablePlayer.cs" />
+    <Compile Include="Assets\MVVM\model\tables\TableStory.cs" />
+    <Compile Include="Assets\MVVM\model\tables\TableVisited.cs" />
     <Compile Include="Assets\MVVM\viewModel\Actions\Pickup.cs" />
-    <Compile Include="Assets\MVVM\viewModel\CanvasAndSceneManagement\identifyCanvas.cs" />
     <Compile Include="Assets\MVVM\viewModel\CanvasAndSceneManagement\LoadOnClickCanvas.cs" />
     <Compile Include="Assets\MVVM\viewModel\CanvasAndSceneManagement\onClickSceneChange.cs" />
     <Compile Include="Assets\MVVM\viewModel\CanvasAndSceneManagement\SetActiveCanvas.cs" />
     <Compile Include="Assets\MVVM\viewModel\CommandProcessor.cs" />
+    <Compile Include="Assets\MVVM\viewModel\dataBetweenScenesManager.cs" />
     <Compile Include="Assets\MVVM\viewModel\Firebase Scripts\AuthManager.cs" />
     <Compile Include="Assets\MVVM\viewModel\Firebase Scripts\firebaseInitialization.cs" />
-    <Compile Include="Assets\MVVM\viewModel\Firebase Scripts\firebaseManager.cs" />
     <Compile Include="Assets\MVVM\viewModel\Firebase Scripts\firebaseRouter.cs" />
-    <Compile Include="Assets\MVVM\viewModel\Firebase Scripts\FormManager.cs" />
     <Compile Include="Assets\MVVM\viewModel\focusInput.cs" />
+    <Compile Include="Assets\MVVM\viewModel\FormManager.cs" />
     <Compile Include="Assets\MVVM\viewModel\GameManager.cs" />
     <Compile Include="Assets\MVVM\viewModel\inventoryOutput.cs" />
+    <Compile Include="Assets\MVVM\viewModel\mapOutput.cs" />
+    <Compile Include="Assets\MVVM\viewModel\MenuManager.cs" />
     <Compile Include="Assets\MVVM\viewModel\TextIO.cs" />
     <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-auth-unity\maven-metadata.xml" />
     <None Include="Assets\Firebase\Plugins\link.xml" />

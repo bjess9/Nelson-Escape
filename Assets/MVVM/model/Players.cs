@@ -6,19 +6,24 @@ using System.IO;
 [Serializable]
 	public class Players
 	{
-	   public List<Player> _players = new List<Player>();
+    #region Commented out code
+    ////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////// NOT IN USE ////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////
+    //public List<Player> _players = new List<Player>();
 
-	  // public Player this[int index] 
-	  // {
-			//get
-			//{ 
-			//	return  _players[index];
-			//} 
-			//set
-			//{
-			//	_players[index] = value;
-			//}
-	  //  }
-	}
+    // public Player this[int index] 
+    // {
+    //get
+    //{ 
+    //	return  _players[index];
+    //} 
+    //set
+    //{
+    //	_players[index] = value;
+    //}
+    //  }
+    #endregion
+}
 
 

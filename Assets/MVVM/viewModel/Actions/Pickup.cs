@@ -5,25 +5,28 @@ using UnityEngine;
 
 [Serializable]
 public static class Pickup  {
+    #region Commented out Code
+    ////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////// NOT IN USE ////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////
+    //public static void PickupItem(Player prCurrentPlayer, Item prItem)
+    //{
+    //    //picking up an item then removing it from the scene
+    //    AddToInven(prCurrentPlayer, prItem);
+    //    RemoveItemFromArea(prCurrentPlayer, prItem);
+    //    //DisplayName = "pick up";
 
+    //}
 
-    public static void PickupItem(Player prCurrentPlayer, Item prItem)
-    {
-        //picking up an item then removing it from the scene
-        AddToInven(prCurrentPlayer, prItem);
-        RemoveItemFromArea(prCurrentPlayer, prItem);
-        //DisplayName = "pick up";
-      
-    }
+    //private static void AddToInven(Player prCurrentPlayer, Item prItem)
+    //{
+    //    prCurrentPlayer._lstInventory.Add(prItem);
+    //}
 
-    private static void AddToInven(Player prCurrentPlayer, Item prItem)
-    {
-        prCurrentPlayer._lstInventory.Add(prItem);
-    }
-
-    public static void RemoveItemFromArea(Player prCurrentPlayer, Item prItem)
-    {
-        //fix
-        prCurrentPlayer._currentArea.areaElements.Remove(prItem);
-    }
+    //public static void RemoveItemFromArea(Player prCurrentPlayer, Item prItem)
+    //{
+    //    //fix
+    //    prCurrentPlayer._currentArea.areaElements.Remove(prItem);
+    //}
+    #endregion
 }

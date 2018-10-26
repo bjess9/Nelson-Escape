@@ -1,17 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class focusInput : MonoBehaviour {
 
-	// Use this for initialization
-
-    // focuses input field for the user
+    /// <summary>
+    /// focuses input field for the user
+    /// </summary>
 	void Start () {
 		InputField lcFocusMe = gameObject.GetComponent<InputField> ();
 		lcFocusMe.ActivateInputField ();
 	}
-	
-
 }
